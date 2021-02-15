@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<style>
+     ul{
+        color: white;
+    }
+</style>
+
+
+
+
+<div class="row mt-4 mb-2">
+    <div class="col">
+        <h2>Add item</h2>
+        <form action="add_todo/" method="post" class="form-inline" style="width: 70%;">
+            {% csrf_token %}
+            <input type="text" name="content" class="form-control  mb-2 mt-2  mr-sm-2 " placeholder="Type here...">
+            <button type="submit" style="display: inline-block;" class="btn btn-primary mr-2" style="border-radius: 10px;">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% for item in todo_items %}
+            <ul style="background: black"  class="list-group mt-4">
+                <li class="list-group-item" style="background: black" style="border-radius: 10px;" >{{ item.text }}
+
+                    <div class="float-end">
+                        <form action="delete_todo/{{item.id}}/" method="post">
+                            <button  type="submit" class="btn btn btn-danger"  style="border-radius: 10px;">Delete</button>
+                        </form>
+                    </div>
+
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
